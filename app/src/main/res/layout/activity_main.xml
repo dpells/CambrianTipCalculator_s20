@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="An image of a restaurant"
+            android:src="@drawable/background"
+            android:visibility="gone"/>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bill Amount" />
+
+                <EditText
+                    android:id="@+id/billAmount_edittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:inputType="numberDecimal"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/tipPercent_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tip Percent" />
+                <TextView
+                    android:id="@+id/tipPercent_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15%" />
+                <Button
+                    android:id="@+id/decrease_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:visibility="gone"/>
+                <Button
+                    android:id="@+id/increase_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+" />
+            </TableRow>
+            <TableRow android:visibility="gone">
+                <SeekBar
+                    android:id="@+id/tipPercent_seekBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="4"
+                    android:max="50"
+                    android:progress="15"/>
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tip Amount" />
+                <TextView
+                    android:id="@+id/tipAmount_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0.00" />
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total" />
+                <TextView
+                    android:id="@+id/totalAmount_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0.00" />
+            </TableRow>
+
+            <TableRow>
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_span="4">
+                    <CheckBox
+                        android:id="@+id/rememberTip_checkBox"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:checked="true" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Remember total?" />
+                </LinearLayout>
+            </TableRow>
+            <TableRow>
+
+                <CheckedTextView
+                    android:id="@+id/rememberTip_checkTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkMark="?android:listChoiceIndicatorMultiple"
+
+                    android:checked="false"
+                    android:clickable="true"
+                    android:text="Remember total?" />
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Split the bill" />
+                <RadioGroup
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_span="3"
+                    android:checkedButton="@id/split2">
+                    <RadioButton
+                        android:id="@+id/split1"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="1 person" />
+                    <RadioButton
+                        android:id="@+id/split2"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="2 people" />
+                    <RadioButton
+                        android:id="@+id/split3"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="3 people" />
+                    <RadioButton
+                        android:id="@+id/split4"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="4 people" />
+                </RadioGroup>
+            </TableRow>
+            <TableRow>
+                <Spinner
+                    android:id="@+id/splitBill_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"/>
+            </TableRow>
+        </TableLayout>
+
+
+    </FrameLayout>
+</ScrollView>

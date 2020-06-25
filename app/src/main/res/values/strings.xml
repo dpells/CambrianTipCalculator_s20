@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TipCalculator_s20</string>
+
+    <string-array name="split_array">
+        <item>No</item>
+        <item>2 people</item>
+        <item>3 people</item>
+        <item>4 people</item>
+    </string-array>
+</resources>
