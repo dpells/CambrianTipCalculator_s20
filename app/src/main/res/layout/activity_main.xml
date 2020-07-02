@@ -48,15 +48,14 @@
                     android:id="@+id/decrease_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-"
-                    android:visibility="gone"/>
+                    android:text="-"/>
                 <Button
                     android:id="@+id/increase_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+" />
             </TableRow>
-            <TableRow android:visibility="gone">
+            <TableRow>
                 <SeekBar
                     android:id="@+id/tipPercent_seekBar"
                     android:layout_width="wrap_content"
@@ -89,6 +88,18 @@
                     android:layout_height="wrap_content"
                     android:text="$0.00" />
             </TableRow>
+            <TableRow android:id="@+id/splitRow">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total after split" />
+                <TextView
+                    android:id="@+id/splitAmount_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0.00" />
+            </TableRow>
 
             <TableRow>
                 <LinearLayout
@@ -106,18 +117,6 @@
                         android:text="Remember total?" />
                 </LinearLayout>
             </TableRow>
-            <TableRow>
-
-                <CheckedTextView
-                    android:id="@+id/rememberTip_checkTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checkMark="?android:listChoiceIndicatorMultiple"
-
-                    android:checked="false"
-                    android:clickable="true"
-                    android:text="Remember total?" />
-            </TableRow>
 
             <TableRow>
                 <TextView
@@ -125,6 +124,7 @@
                     android:layout_height="wrap_content"
                     android:text="Split the bill" />
                 <RadioGroup
+                    android:id="@+id/splitRadioGroup"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:layout_span="3"
@@ -150,13 +150,6 @@
                         android:layout_width="wrap_content"
                         android:text="4 people" />
                 </RadioGroup>
-            </TableRow>
-            <TableRow>
-                <Spinner
-                    android:id="@+id/splitBill_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_span="3"/>
             </TableRow>
         </TableLayout>
 
