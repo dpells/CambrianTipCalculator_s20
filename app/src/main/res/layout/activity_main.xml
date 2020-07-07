@@ -16,14 +16,25 @@
             android:src="@drawable/background"
             android:visibility="gone"/>
         <TableLayout
+            style="@style/Table"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TableRow>
+            <TableRow style="@style/TableRow">
+
                 <TextView
+                    style='@style/Label.Title'
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bill Amount" />
+                    android:text="Bill Amount"
+                    android:textAlignment="inherit"
+                    android:textAllCaps="false" />
+                    <!-- This is an in-line style. High flexibility, high reused code
+                        android:textColor="@color/primaryText"
+                         android:textStyle="bold"
+
+                          Styles can inherit properties and override others
+                          style='@style/TextView'-->
 
                 <EditText
                     android:id="@+id/billAmount_edittext"
@@ -33,75 +44,90 @@
                     android:inputType="numberDecimal"/>
             </TableRow>
 
-            <TableRow>
+            <TableRow style="@style/TableRow">
                 <TextView
                     android:id="@+id/tipPercent_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tip Percent" />
+                    android:text="Tip Percent"
+                    style='@style/Label'/>
+                <!--Labels have extra styles, so they can't inherit from the theme -->
                 <TextView
                     android:id="@+id/tipPercent_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="15%" />
+                    android:text="15%"/>
+                <!--TextViews have basic styles that they can inherit from Theme -->
                 <Button
                     android:id="@+id/decrease_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-"/>
+                    android:text="-" />
+
                 <Button
                     android:id="@+id/increase_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+" />
             </TableRow>
-            <TableRow>
+            <TableRow style="@style/TableRow">
+
                 <SeekBar
                     android:id="@+id/tipPercent_seekBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_span="4"
                     android:max="50"
-                    android:progress="15"/>
+                    android:progress="15"
+                    android:progressBackgroundTint="#5C0CF3"
+                    android:progressTint="#3803F8"
+                    android:thumbTint="#3803F8"/>
+                <!-- putting the seekbar styles here since they're different than the theme -->
             </TableRow>
-            <TableRow>
+            <TableRow style="@style/TableRow">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tip Amount" />
+                    style='@style/Label'
+                    android:text="Tip Amount"/>
                 <TextView
                     android:id="@+id/tipAmount_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$0.00" />
+                    android:layout_span="3"
+                    android:text="$0.00"/>
             </TableRow>
-            <TableRow>
+            <TableRow style="@style/TableRow">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style='@style/Label'
                     android:text="Total" />
                 <TextView
                     android:id="@+id/totalAmount_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_span="3"
                     android:text="$0.00" />
             </TableRow>
-            <TableRow android:id="@+id/splitRow">
+            <TableRow android:id="@+id/splitRow" style="@style/TableRow">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style='@style/Label'
                     android:text="Total after split" />
                 <TextView
                     android:id="@+id/splitAmount_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_span="3"
                     android:text="$0.00" />
             </TableRow>
 
-            <TableRow>
+            <TableRow style="@style/TableRow">
                 <LinearLayout
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
@@ -113,41 +139,50 @@
                         android:checked="true" />
                     <TextView
                         android:layout_width="wrap_content"
+                        style='@style/Label'
                         android:layout_height="wrap_content"
                         android:text="Remember total?" />
                 </LinearLayout>
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                style="@style/TableRow">
+
                 <TextView
+                    style='@style/Label'
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Split the bill" />
+
                 <RadioGroup
                     android:id="@+id/splitRadioGroup"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_span="3"
                     android:checkedButton="@id/split2">
+
                     <RadioButton
                         android:id="@+id/split1"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="1 person" />
+
                     <RadioButton
                         android:id="@+id/split2"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="2 people" />
+
                     <RadioButton
                         android:id="@+id/split3"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="3 people" />
+
                     <RadioButton
                         android:id="@+id/split4"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="4 people" />
                 </RadioGroup>
             </TableRow>
