@@ -3,11 +3,15 @@ package ca.davidpellegrini.tipcalculator_s20;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
@@ -41,13 +45,25 @@ public class MainActivity extends AppCompatActivity
 
     private String billAmountString;
     private int numPeople, counter;
+    private final int ROUND_NONE = 0, ROUND_TIP = 1, ROUND_TOTAL = 2;
+    private int rounding = ROUND_NONE;
     private float billAmount, tipPercent, tipAmount, totalAmount, splitAmount;
+    private boolean darkTheme;
 
     private SharedPreferences savedValues;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        savedValues = PreferenceManager.getDefaultSharedPreferences(this);
+        darkTheme = savedValues.getBoolean("pref_dark_theme", false);
+        if(darkTheme){
+            setTheme(R.style.DarkTheme);
+        }
+        else{
+            setTheme(R.style.LightTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -95,7 +111,7 @@ public class MainActivity extends AppCompatActivity
 
         rememberTotal = findViewById(R.id.rememberTip_checkBox);
 
-        savedValues = getSharedPreferences("TipCalculatorSavedVales", MODE_PRIVATE);
+        //savedValues = getSharedPreferences("TipCalculatorSavedVales", MODE_PRIVATE);
     }
 
     @Override
@@ -105,7 +121,12 @@ public class MainActivity extends AppCompatActivity
         billAmountString = savedValues.getString("billAmountString", "");
         tipPercent = savedValues.getFloat("tipPercent", 0.15f);
         numPeople = savedValues.getInt("numPeople", 2);
-        rememberTotal.setChecked(savedValues.getBoolean("rememberTotal", true));
+        //rememberTotal.setChecked(savedValues.getBoolean("rememberTotal", true));
+        rememberTotal.setChecked(savedValues.getBoolean("pref_remember_total", true));
+        rounding = Integer.parseInt(
+                savedValues.getString(
+                        "pref_rounding", Integer.toString(ROUND_NONE)));
+        darkTheme = savedValues.getBoolean("pref_dark_theme", false);
         switch (numPeople){
             case 1:
                 splitBillRadioGroup.check(R.id.split1);
@@ -141,6 +162,30 @@ public class MainActivity extends AppCompatActivity
         super.onPause();
     }
 
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.activity_tip_calculator, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.menu_settings:
+                Intent settings = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(settings);
+                break;
+            case R.id.menu_about:
+                Toast.makeText(this, "Developed by David Pellegrini for Cambrian College JAV1001",
+                        Toast.LENGTH_LONG).show();
+                //startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        // do more actions here
+        // maybe pop up a different toast
+        return true;
+    }
+
     public void calculateAndDisplay(){
         billAmountString = billAmountEditText.getText().toString();
         if(billAmountString.equals("")){
@@ -157,20 +202,43 @@ public class MainActivity extends AppCompatActivity
             splitRow.setVisibility(View.VISIBLE);
         }
 
-        int percent = (int)(tipPercent * 100);
-        tipPercentTextView.setText(percent + "%");
-        tipPercentSeekBar.setProgress(percent);
+//        int percent = (int)(tipPercent * 100);
+//        tipPercentTextView.setText(percent + "%");
+//        tipPercentSeekBar.setProgress(percent);
+//
+//        tipAmount = billAmount * tipPercent;
+//        totalAmount = billAmount + tipAmount;
 
-        tipAmount = billAmount * tipPercent;
-        totalAmount = billAmount + tipAmount;
+        float tipPercentToDisplay = tipPercent;
+        if(rounding == ROUND_NONE){
+            tipAmount = billAmount * tipPercent;
+            totalAmount = billAmount + tipAmount;
+        }
+        else if(rounding == ROUND_TIP){
+            tipAmount = StrictMath.round(billAmount * tipPercent);
+            totalAmount = billAmount + tipAmount;
+            tipPercentToDisplay = tipAmount / billAmount;
+        }
+        else if(rounding == ROUND_TOTAL){
+            float tipNotRounded = billAmount * tipPercent;
+            totalAmount = StrictMath.round(billAmount + tipNotRounded);
+            tipAmount = totalAmount - billAmount;
+            tipPercentToDisplay = tipAmount / billAmount;
+        }
         splitAmount = totalAmount / numPeople;
 
+        tipPercentTextView.setText((int)(tipPercentToDisplay * 100) + "%");
+        tipPercentSeekBar.setProgress((int)(tipPercentToDisplay * 100));
         NumberFormat currency = NumberFormat.getCurrencyInstance();
         tipAmountTextView.setText(currency.format(tipAmount));
         totalTextView.setText(currency.format(totalAmount));
         splitTextView.setText(currency.format(splitAmount));
     }
 
+    /*
+        A method that changes the AndroidManifest theme from
+        android:theme="@style/LightTheme" to android:theme="@style/DarkTheme"
+     */
     @Override
     public void onClick(View v) {
         //to something when a click event happens

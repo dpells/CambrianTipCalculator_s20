@@ -5,6 +5,12 @@
     <color name='colorPrimaryLight'>#4c8c4a</color>
     <color name="colorAccent">#26c6da</color>
     <color name='colorAccentLight'>#0095a8</color>
-    <color name='primaryText'>@android:color/white</color>
-    <color name='secondaryText'>@android:color/black</color>
+    <color name='primaryText'>@android:color/black</color>
+    <color name='secondaryText'>@android:color/white</color>
+
+    <color name="Primary">#1B2C5E</color>
+    <color name="PrimaryDark">#000533</color>
+    <color name='PrimaryLight'>#4A538C</color>
+    <color name="Accent">#38DA26</color>
+    <color name='AccentLight'>#19A800</color>
 </resources>

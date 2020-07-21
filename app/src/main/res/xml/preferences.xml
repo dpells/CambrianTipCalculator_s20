@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:key="pref_remember_total"
+        android:title="Remember total?"
+        android:summary="Remember the most resent value when the app is closed"
+        android:defaultValue="true"/>
+    <ListPreference
+        android:key="pref_rounding"
+        android:title="Ronding"
+        android:summary="Round either the tip or the total to the nearest whole value"
+        android:entries="@array/rounding_keys"
+        android:entryValues="@array/rounding_values" />
+    <SwitchPreference
+        android:key="pref_dark_theme"
+        android:title="Use a dark theme"
+        android:summary="Change the colours of the app. Optimized for battery usage, and reduces eye strain"
+    />
+</PreferenceScreen>

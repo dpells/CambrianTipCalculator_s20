@@ -1,10 +1,18 @@
 <resources>
     <string name="app_name">TipCalculator_s20</string>
 
-    <string-array name="split_array">
-        <item>No</item>
-        <item>2 people</item>
-        <item>3 people</item>
-        <item>4 people</item>
+    <string-array name="rounding_keys">
+        <item>None</item>
+        <item>Round Tip</item>
+        <item>Round Total</item>
     </string-array>
+
+    <string-array name="rounding_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
